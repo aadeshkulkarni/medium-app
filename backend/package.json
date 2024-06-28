@@ -13,9 +13,11 @@
   },
   "dependencies": {
     "@aadeshk/medium-common": "^1.0.2",
+    "@google/generative-ai": "^0.13.0",
     "@prisma/client": "^5.13.0",
     "@prisma/extension-accelerate": "^1.0.0",
     "dotenv": "^16.4.5",
+    "googleapis": "^140.0.0",
     "hono": "^4.2.7",
     "openai": "^4.47.1",
     "prisma": "^5.13.0"
