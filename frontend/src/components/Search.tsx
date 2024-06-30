@@ -50,19 +50,19 @@ const Search: React.FC = () => {
     <div className="hidden md:block relative md:w-[190px] lg:w-[400px]">
       <input
         type="text"
-        className="p-2 px-6 border rounded-full focus:outline-none focus:ring-black focus:ring-1 w-full"
+        className="p-2 px-6 border rounded-full focus:outline-none focus:ring-black focus:ring-1 w-full bg-main text-main"
         placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
       {query && (
         <>
-          <div className="absolute top-9 left-0 right-0 bg-white border border-gray-100 shadow-lg rounded mt-1 z-10 md:w-[450px] lg:w-[600px]">
+          <div className="absolute top-9 left-0 right-0 bg-main border border-gray-100 shadow-lg rounded mt-1 z-10 md:w-[450px] lg:w-[600px]">
             <div className="p-2">
               <h3 className="text-lg font-semibold py-2 pb-1">Posts</h3>
               {results.posts.length > 0 ? (
                 results.posts.map((post) => (
-                  <Link key={post.id} to={`/blog/${post.id}`} className="block p-1 cursor-pointer hover:bg-gray-50">
+                  <Link key={post.id} to={`/blog/${post.id}`} className="block p-1 cursor-pointer hover:bg-sub">
                     <div>{post.title}</div>
                   </Link>
                 ))
@@ -74,7 +74,7 @@ const Search: React.FC = () => {
               <h3 className="text-lg font-semibold">Users</h3>
               {results.users.length > 0 ? (
                 results.users.map((user) => (
-                  <Link key={user.id} to={`/profile/${user.id}`} className="block p-1 cursor-pointer hover:bg-gray-50">
+                  <Link key={user.id} to={`/profile/${user.id}`} className="block p-1 cursor-pointer hover:bg-sub">
                     <div>{user.name}</div>
                   </Link>
                 ))
@@ -86,7 +86,7 @@ const Search: React.FC = () => {
               <h3 className="text-lg font-semibold">Tags</h3>
               {results.tags.length > 0 ? (
                 results.tags.map((tag) => (
-                  <Link key={tag.id} to={`/blogs?tag=${tag.id}`} className="block p-1 cursor-pointer hover:bg-gray-50">
+                  <Link key={tag.id} to={`/blogs?tag=${tag.id}`} className="block p-1 cursor-pointer hover:bg-sub">
                     <div>{tag.tagName}</div>
                   </Link>
                 ))

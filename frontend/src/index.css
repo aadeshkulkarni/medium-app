@@ -1,194 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wdth,wght@0,62.5..100,100..900;1,62.5..100,100..900&display=swap');
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
-@tailwind base;
-
-@media screen and (max-width: 768px) {
   @layer base {
-    html {
-      scroll-snap-type: y mandatory;
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 84% 4.9%;
+
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 84% 4.9%;
+
+      --popover: 0 0% 100%;
+      --popover-foreground: 222.2 84% 4.9%;
+
+      --primary: 222.2 47.4% 11.2%;
+      --primary-foreground: 210 40% 98%;
+
+      --secondary: 210 40% 96.1%;
+      --secondary-foreground: 222.2 47.4% 11.2%;
+
+      --muted: 210 40% 96.1%;
+      --muted-foreground: 215.4 16.3% 46.9%;
+
+      --accent: 210 40% 96.1%;
+      --accent-foreground: 222.2 47.4% 11.2%;
+
+      --destructive: 0 84.2% 60.2%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 214.3 31.8% 91.4%;
+      --input: 214.3 31.8% 91.4%;
+      --ring: 222.2 84% 4.9%;
+
+      --radius: 0.5rem;
+    }
+
+    .dark {
+      --background: 222.2 84% 4.9%;
+      --foreground: 210 40% 98%;
+
+      --card: 222.2 84% 4.9%;
+      --card-foreground: 210 40% 98%;
+
+      --popover: 222.2 84% 4.9%;
+      --popover-foreground: 210 40% 98%;
+
+      --primary: 210 40% 98%;
+      --primary-foreground: 222.2 47.4% 11.2%;
+
+      --secondary: 217.2 32.6% 17.5%;
+      --secondary-foreground: 210 40% 98%;
+
+      --muted: 217.2 32.6% 17.5%;
+      --muted-foreground: 215 20.2% 65.1%;
+
+      --accent: 217.2 32.6% 17.5%;
+      --accent-foreground: 210 40% 98%;
+
+      --destructive: 0 62.8% 30.6%;
+      --destructive-foreground: 210 40% 98%;
+
+      --border: 217.2 32.6% 17.5%;
+      --input: 217.2 32.6% 17.5%;
+      --ring: 212.7 26.8% 83.9%;
+    }
+  }
+
+  @layer base {
+    * {
+      @apply border-border;
     }
     body {
-      overflow-y: scroll; 
-      scroll-snap-type: y mandatory;
-    }
-    .snap-center {
-      scroll-snap-align: center;
+      @apply bg-background text-foreground;
     }
   }
+
+  /* The base text and background with sub text and background
+    Use this instead of writing css properties*/
+
+  @layer utilities { 
+    .text-main {
+      @apply text-black dark:text-white; 
+    }
+
+    .text-sub {
+      @apply text-gray-500 dark:text-gray-400;
+    }
+
+    .bg-main {
+      @apply bg-white dark:bg-slate-950;
+    }
+
+    .bg-sub {
+      @apply bg-gray-100 dark:bg-slate-900;
+    }
+
+   /* Ensures the custom style is specific enough to override default Quill styles */
+    .custom-quill .ql-editor.ql-blank::before {
+  color: gray; /* Change this to your desired placeholder color */
+  opacity: 1;   /* Ensures the placeholder text is visible */
 }
-
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  html, body {
-    width: 100vw; 
-    overflow-x: hidden; 
-    font-family: 'Noto Sans', sans-serif;
-    box-sizing: border-box;
+ 
   }
-
-  /* Keep adding variants for button here */
-  button.primary {
-    @apply block text-white bg-green-700 text-sm rounded-3xl px-4 py-2 m-0 hover:bg-green-800;
-  }
-
-  button.primary:disabled {
-    @apply opacity-60 pointer-events-none;
-  }
-
-  button.secondary {
-    @apply block bg-white text-sm rounded-3xl px-4 py-2 m-0 hover:bg-gray-200 border;
-  }
-
-  button.secondary:disabled {
-    @apply opacity-60 pointer-events-none;
-  }
-}
-
-.ql-editor {
-  @apply font-noto-serif text-lg !p-0 md:p-4;
-}
-
-.ql-editor.ql-blank::before {
-  @apply inset-0 not-italic text-gray-400 font-light text-xl;
-}
-
-.quill {
-  min-height: 500px;
-}
-
-.blog-card .quill {
-  min-height: 50px;
-}
-
-.blog-card .ql-editor {
-  padding: 0;
-}
-
-.blog-card .ql-editor p,
-.blog-card .ql-editor h1,
-.blog-card .ql-editor h2,
-.blog-card .ql-editor h3 {
-  @apply text-sm;
-}
-
-.sparkle {
-  width: 5px;
-  height: 5px;
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0;
-  animation: sparkle-animation 0.5s forwards;
-}
-
-.star {
-  width: 0;
-  height: 0;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-bottom: 5px solid;
-}
-
-@keyframes sparkle-animation {
-  0% {
-    opacity: 1;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.5);
-  }
-}
-
-.clap-button {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-}
-
-.clapping {
-  transform: scale(1.5);
-}
-
-.container-chevron {
-  position: relative;
-  width: 24px;
-  height: 24px;
-}
-
-.chevron {
-  position: absolute;
-  width: 28px;
-  height: 2px;
-  opacity: 0;
-  transform: scale3d(0.5, 0.5, 0.5);
-  animation: move 3s ease-out infinite;
-}
-
-.chevron:first-child {
-  animation: move 3s ease-out 1s infinite;
-}
-
-.chevron:nth-child(2) {
-  animation: move 3s ease-out 2s infinite;
-}
-
-.chevron:before,
-.chevron:after {
-  content: ' ';
-  position: absolute;
-  top: 0;
-  height: 100%;
-  width: 51%;
-  background: #fff;
-}
-
-.chevron:before {
-  left: 0;
-  transform: skew(0deg, 30deg);
-}
-
-.chevron:after {
-  right: 0;
-  width: 50%;
-  transform: skew(0deg, -30deg);
-}
-
-@keyframes move {
-  25% {
-    opacity: 1;
-  }
-  33% {
-    opacity: 1;
-    transform: translateY(30px);
-  }
-  67% {
-    opacity: 1;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
-  }
-}
-
-.text {
-  display: block;
-  margin-top: 75px;
-  margin-left: -30px;
-  font-family: 'Helvetica Neue', 'Helvetica', Arial, sans-serif;
-  font-size: 12px;
-  color: #fff;
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0.25;
-  animation: pulse 2s linear alternate infinite;
-}
-
-@keyframes pulse {
-  to {
-    opacity: 1;
-  }
-}

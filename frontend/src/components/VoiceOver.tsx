@@ -40,7 +40,7 @@ const VoiceOver = ({ content }: VoiceOverProps) => {
   };
 
   return (
-    <div className="flex w-full items-center justify-between gap-2 bg-gray-100 hover:bg-gray-200 py-2 px-2 rounded-full">
+    <div className="flex w-full items-center justify-between gap-2 bg-sub hover:bg-sub py-2 px-2 rounded-full">
       {voiceOverOn ? (
         <div className="flex items-center gap-2">
           <button
@@ -48,7 +48,7 @@ const VoiceOver = ({ content }: VoiceOverProps) => {
               toggleVoiceOver((prev) => !prev);
               handlePause();
             }}
-            className="rounded-full p-1.5 hover:bg-gray-300"
+            className="rounded-full p-1.5 hover:bg-sub"
           >
             <Pause />
           </button>

@@ -65,7 +65,7 @@ const TopicsSlider: React.FC<topicProps> = ({ selectedTopic, setSelectedTopic }:
           <AddTopicIcon />
         </div>
       ) : (
-        <button onClick={scrollLeft} className="demo absolute -left-5 z-10 p-1">
+        <button onClick={scrollLeft} className="demo absolute -left-5 z-10 bg-sub p-1">
           <LeftArrowIcon />
         </button>
       )}
@@ -80,7 +80,7 @@ const TopicsSlider: React.FC<topicProps> = ({ selectedTopic, setSelectedTopic }:
               className={`flex-shrink-0 cursor-pointer px-3 py-2 text-sm font-semibold transition-colors duration-200 ${
                 selectedTopic === topic.value
                   ? 'text-black font-bold underline underline-offset-8 decoration-black'
-                  : 'text-gray-400 hover:text-black hover:bg-gray-100'
+                  : 'text-gray-400 hover:text-main hover:bg-main'
               }`}
             >
               {topic.text}
@@ -88,7 +88,7 @@ const TopicsSlider: React.FC<topicProps> = ({ selectedTopic, setSelectedTopic }:
           ))
         )}
       </div>
-      <button onClick={scrollRight} className="absolute -right-5 z-10 bg-white p-1">
+      <button onClick={scrollRight} className="absolute -right-5 z-10 bg-sub p-1">
         <RightArrowIcon />
       </button>
     </div>

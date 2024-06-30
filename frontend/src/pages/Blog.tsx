@@ -4,7 +4,7 @@ import Story from '../components/Blog/Story';
 const Blog = () => {
   return (
     <>
-      <Appbar />
+      <Appbar/>
       <Story />
     </>
   );

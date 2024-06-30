@@ -116,13 +116,13 @@ const UserProfile = ({ id }: UserProfileProps) => {
                 </div>
                 <nav className="flex flex-row gap-5 mt-3 border-b">
                   <div
-                    className={`cursor-pointer hover:text-black py-3 ${currentTab === 'Home' ? 'text-black border-b border-black' : 'text-gray-500'}`}
+                    className={`cursor-pointer hover:text-main py-3 ${currentTab === 'Home' ? 'text-main border-b border-black' : 'text-sub'}`}
                     onClick={() => setCurrentTab('Home')}
                   >
                     Home
                   </div>
                   <div
-                    className={`cursor-pointer hover:text-black py-3 ${currentTab === 'About' ? 'text-black border-b border-black' : 'text-gray-500'}`}
+                    className={`cursor-pointer hover:text-main py-3 ${currentTab === 'About' ? 'text-main border-b border-black' : 'text-gray-500'}`}
                     onClick={() => setCurrentTab('About')}
                   >
                     About

@@ -25,13 +25,13 @@ const BlogCard = ({ author, title, content, publishedDate, id, fullWidth, tagsOn
   return (
     <Link
       to={`/blog/${id}`}
-      className={`snap-center min-h-screen md:min-h-min md:h-min blog-card md:px-4 md:py-8 ${fullWidth ? 'w-full' : 'w-full md:w-3/6'} md:border-b md:border-gray-200 my-1 bg-white shadow-b-sm flex flex-col justify-between md:grid md:grid-cols-12 md:gap-6 lg:gap-0`}
+      className={`snap-center min-h-screen md:min-h-min md:h-min blog-card md:px-4 md:py-8 ${fullWidth ? 'w-full' : 'w-full md:w-3/6'} md:border-b md:border-gray-200 my-1 bg-main shadow-b-sm flex flex-col justify-between md:grid md:grid-cols-12 md:gap-6 lg:gap-0`}
     >
       <div className="order-2 flex flex-col md:order-none md:col-span-9 p-4 md:px-4">
         <div className="order-3 md:order-none flex items-center gap-4">
           <Avatar name={author?.name || ''} imageSrc={author?.profilePic} />
           <div>
-            <span>{author?.name}</span> ·{' '}
+            <span className='text-main'>{author?.name}</span> ·{' '}
             <span className="text-sm text-slate-500">{formatDateString(publishedDate)}</span>
           </div>
         </div>

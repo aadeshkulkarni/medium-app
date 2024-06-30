@@ -51,9 +51,9 @@ const ChatModule = () => {
 
   if (!userId) {
     return (
-      <div className="mt-8 p-6 bg-white rounded-lg max-w-3xl mx-auto">
+      <div className="mt-8 p-6 bg-main rounded-lg max-w-3xl mx-auto border">
         <hr className="mb-4 border-gray-300" />
-        <div className="text-2xl font-semibold mb-4 text-gray-800">Please sign in to ask questions to AI✨</div>
+        <div className="text-2xl font-semibold mb-4 text-main">Please sign in to ask questions to AI✨</div>
         <button
           onClick={() => navigate('/signin')}
           className="ml-3 bg-[#0a8660] text-white p-2 rounded-lg hover:bg-[#374151] transition-colors"
@@ -65,8 +65,8 @@ const ChatModule = () => {
   }
 
   return (
-    <div className="mt-6 p-6 bg-white rounded-lg max-w-3xl mx-auto">
-      <div className="text-2xl font-semibold mb-6 text-gray-800">Have any doubts? Ask AI.</div>
+    <div className="mt-6 p-6 bg-main rounded-lg max-w-3xl mx-auto border">
+      <div className="text-2xl font-semibold mb-6 text-main">Have any doubts? Ask AI.</div>
       <hr className="mb-6 border-gray-300" />
       <div
         ref={chatContainerRef}
@@ -75,14 +75,14 @@ const ChatModule = () => {
         {messages.map((msg, index) => (
           <div
             key={index}
-            className={`p-4 rounded-lg max-w-lg ${msg.role === 'user' ? 'bg-[#e2f2e9] border border-gray-300 self-end' : 'bg-white border border-gray-200 self-start'}`}
+            className={`p-4 rounded-lg max-w-lg ${msg.role === 'user' ? 'bg-green-300 text-slate-950 border border-gray-300 self-end' : 'bg-main  border border-gray-200 self-start'}`}
           >
             <strong className="font-semibold">{msg.role === 'user' ? 'You:' : 'Assistant:'}</strong> {msg.content}
           </div>
         ))}
-        {isLoading && <div className="text-gray-500">Assistant is typing...</div>}
+        {isLoading && <div className="text-sub">Assistant is typing...</div>}
         {messages.length >= CHAT_LIMIT && (
-          <div className="text-gray-500 font-semibold">Chat limit reached. Please reset the chat to continue.</div>
+          <div className="text-sub font-semibold">Chat limit reached. Please reset the chat to continue.</div>
         )}
       </div>
       <div className="flex items-center">
@@ -102,14 +102,14 @@ const ChatModule = () => {
           />
           <button
             type="submit"
-            className="bg-[#e2f2e9] p-2 rounded-full hover:bg-[#c0dfd3] transition-colors"
+            className="bg-green-200 p-2 rounded-full hover:bg-green-300 transition-colors"
             disabled={isLoading || !userId || messages.length >= CHAT_LIMIT}
           >
             <SendIcon className="w-6 h-6 text-gray-500" />
           </button>
         </form>
         <div
-          className="ml-4 cursor-pointer p-3 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+          className="ml-4 cursor-pointer p-3 rounded-full bg-sub hover:bg-gray-300 transition-colors"
           onClick={resetChat}
         >
           <ResetIcon className="w-6 h-6 text-gray-500" />

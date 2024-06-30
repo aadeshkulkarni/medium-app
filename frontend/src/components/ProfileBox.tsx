@@ -39,16 +39,16 @@ const ProfileBox = () => {
       {show && (
         <div
           ref={ref}
-          className="absolute -bottom-32 -left-28 shadow-lg bg-gray-50 border rounded-md border-gray-100 z-50 w-[160px]"
+          className="absolute -bottom-32 -left-28 shadow-lg bg-main border rounded-md border-gray-100 z-50 w-[160px]"
         >
           <div className="flex flex-col">
-            <div className="px-4 py-2 hover:bg-gray-300" onClick={goToProfile}>
+            <div className="px-4 py-2 hover:bg-sub" onClick={goToProfile}>
               Profile
             </div>
-            <div className="px-4 py-2 hover:bg-gray-300" onClick={goToBookmarks}>
+            <div className="px-4 py-2 hover:bg-sub" onClick={goToBookmarks}>
               Bookmarks
             </div>
-            <div className="px-4 py-2 hover:bg-gray-300" onClick={logout}>
+            <div className="px-4 py-2 hover:bg-sub" onClick={logout}>
               Logout
             </div>
           </div>

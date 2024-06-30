@@ -10,11 +10,11 @@ const SkeletonContributorGrid: React.FC = () => {
 
 const SkeletonContributor: React.FC = () => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center justify-center transform transition-transform duration-300 hover:scale-105">
-      <div className="bg-gray-200 w-20 h-20 rounded-full flex items-center justify-center mb-4 animate-pulse"></div>
+    <div className="bg-main shadow-md rounded-lg p-4 flex flex-col items-center justify-center transform transition-transform duration-300 hover:scale-105">
+      <div className="bg-sub w-20 h-20 rounded-full flex items-center justify-center mb-4 animate-pulse"></div>
       <div className="text-center">
-        <h2 className="text-lg font-medium text-transparent bg-gray-200 h-6 w-32 mb-2 animate-pulse"></h2>
-        <p className="text-gray-600 h-4 w-24 bg-gray-200 animate-pulse"></p>
+        <h2 className="text-lg font-medium text-transparent bg-sub h-6 w-32 mb-2 animate-pulse"></h2>
+        <p className="text-sub h-4 w-24 bg-sub animate-pulse"></p>
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ const Contributors: React.FC = () => {
 
   return (
     <>
-      <Appbar skipAuthCheck={true} />
+      <Appbar skipAuthCheck={true}/>
       <ContributionNotification />
       <div className="p-4 flex flex-col justify-center items-center w-screen">
         <h1 className="text-2xl mb-4">Contributors</h1>
@@ -44,7 +44,7 @@ const Contributors: React.FC = () => {
 };
 
 const ContributionNotification = () => (
-  <div className="bg-gray-50 border text-gray-700 w-full p-4 text-center">
+  <div className="w-full p-4 text-center bg-main text-main border-b">
     <div className="py-4">If you would like to contribute to the project, you can do it by clicking on this link.</div>
     <Link
       className="px-4 py-2 bg-black text-white rounded-full text-xs"
@@ -70,15 +70,13 @@ const ContributorCard = ({ contributor }: { contributor: ContributorProp }) => {
       href={contributor?.html_url}
       target="_blank"
       rel="noopener noreferrer"
-      className="bg-white flex flex-col col-span-12 md:col-span-3 transform transition-transform duration-300 hover:scale-105 border shadow-sm"
+      className="flex flex-col col-span-12 md:col-span-3 transform transition-transform duration-300 hover:scale-105 border shadow-sm text-main bg-main"
     >
       <img src={contributor?.avatar_url} alt={contributor?.login} className="w-full  object-cover" />
       <div className="text-left p-2">
         <h2 className="text-lg font-medium text-nowrap overflow-hidden text-ellipsis">{contributor.login}</h2>
         <h2>Developer</h2>
-        <p className="text-gray-600 text-nowrap overflow-hidden text-ellipsis">
-          {contributor?.contributions} contributions
-        </p>
+        <p className="text-sub text-nowrap overflow-hidden text-ellipsis">{contributor?.contributions} contributions</p>
       </div>
     </a>
   );

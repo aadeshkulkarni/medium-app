@@ -6,7 +6,7 @@ const Blogs = () => {
   const [selectedTopic, setSelectedTopic] = useState<string>('');
   return (
     <>
-      <Appbar skipAuthCheck />
+      <Appbar skipAuthCheck/>
       <TopicsSlider selectedTopic={selectedTopic} setSelectedTopic={setSelectedTopic} />
       <BlogsList />
     </>

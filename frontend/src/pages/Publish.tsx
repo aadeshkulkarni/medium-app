@@ -101,7 +101,7 @@ const Publish = () => {
           <AutogrowTextarea
             id="title"
             rows={1}
-            className="resize-none font-noto-serif placeholder:text-gray-400 text-3xl tracking-wide placeholder:font-light text-black outline-none block w-full py-4"
+            className="resize-none font-noto-serif placeholder:text-sub text-3xl tracking-wide placeholder:font-light text-main outline-none block w-full py-4 bg-main"
             placeholder="Title"
             required
             autoFocus
@@ -114,7 +114,7 @@ const Publish = () => {
           ref={writingPadRef}
           theme="bubble"
           placeholder="Tell your story..."
-          className="tracking-wide text-[#0B1215] font-light"
+          className="tracking-wide text-main bg-main font-light custom-quill"
           value={content}
           onChange={(value) => setContent(htmlTagRegex.test(value) ? '' : value)}
           modules={modules}
