@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import Spinner from './components/Spinner';
+import { RecoilRoot } from 'recoil';
 
 const Home = lazy(() => import('./pages/Home'));
 const Signup = lazy(() => import('./pages/Signup'));
@@ -16,6 +17,7 @@ const Contributor = lazy(() => import('./pages/Contributor'));
 function App() {
   return (
     <BrowserRouter>
+    <RecoilRoot>
       <Suspense
         fallback={
           <div className="w-screen h-screen flex justify-center items-center">
@@ -36,6 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
         </Routes>
       </Suspense>
+      </RecoilRoot>
     </BrowserRouter>
   );
 }

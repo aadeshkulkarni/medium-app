@@ -18,11 +18,17 @@ import { formatDateString } from '../../util/string';
 import VoiceOver from '../VoiceOver';
 import { getPlainTextFromHTML } from '../../util/string';
 import ChatModule from '../ChatModule';
+import { Loadable, useRecoilValueLoadable } from 'recoil';
+import { blogAtom } from '../../store/atoms/singleblog';
+import { Post } from '../../types/post';
 
 const Story = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { blog, loading } = useBlog({ id: id || '' });
+  const singlePost:Loadable<Post> = useRecoilValueLoadable(blogAtom(id));
+  const loading = singlePost.state==="loading";
+  const blog:Post = singlePost.contents
+
 
   function handleClickOnAvatar() {
     navigate(`/profile/${blog?.author?.id}`);
