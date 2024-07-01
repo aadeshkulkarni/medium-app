@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import { toast } from 'react-toastify';
 import { useBlog } from './../../hooks';
@@ -18,11 +18,19 @@ import { formatDateString } from '../../util/string';
 import VoiceOver from '../VoiceOver';
 import { getPlainTextFromHTML } from '../../util/string';
 import ChatModule from '../ChatModule';
+import RecommendedBlogs from './RecommendedBlogs'; // Import the new component
 
 const Story = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { blog, loading } = useBlog({ id: id || '' });
+  const [chatKey, setChatKey] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+    setChatKey((prevKey) => prevKey + 1);
+    },1000);
+  }, [id]);
 
   function handleClickOnAvatar() {
     navigate(`/profile/${blog?.author?.id}`);
@@ -54,12 +62,14 @@ const Story = () => {
         <div className="py-4">
           <ReactQuill value={blog?.content} readOnly={true} theme={'bubble'} />
         </div>
-        <ChatModule />
+        <ChatModule key={chatKey} /> 
+        <RecommendedBlogs authorName = { blog?.author?.name }/> 
       </div>
       <Tags />
     </div>
   );
 };
+
 const ActionBox = () => {
   const navigate = useNavigate();
   const [openUnbookmarkModal, setOpenUnbookmarkModal] = useState(false);
@@ -68,7 +78,7 @@ const ActionBox = () => {
   const { blog, deleteBlog, bookmarkBlog, unbookmarkBlog, likeBlog } = useBlog({
     id: id || '',
   });
-  
+
   const [bookmarked, setBookmarked] = useState(false);
   const user = JSON.parse(localStorage.getItem('user') || '{}') || {};
   const isAuthor = user?.id && user?.id === blog?.author?.id;
@@ -97,7 +107,7 @@ const ActionBox = () => {
   };
 
   const onConfirmUnbookmark = async () => {
-    const userBookmarks = blog.bookmarks?.filter((bookmark) => bookmark.id ) || [];
+    const userBookmarks = blog.bookmarks?.filter((bookmark) => bookmark.id) || [];
     if (userBookmarks.length === 0) {
       console.error("No bookmarks found for the user");
       return;

@@ -1,9 +1,11 @@
+import React from 'react';
 import ReactQuill from 'react-quill';
 import { Link } from 'react-router-dom';
 import 'react-quill/dist/quill.bubble.css';
 import { formatDateString, getPlainTextFromHTML } from '../util/string';
 import Avatar from './Avatar';
 import { Pill } from './Pill';
+import ArticleImage from './ArticleImage';
 
 interface BlogCardProps {
   author: {
@@ -18,7 +20,7 @@ interface BlogCardProps {
   tagsOnPost: Array<any>;
 }
 
-const BlogCard = ({ author, title, content, publishedDate, id, fullWidth, tagsOnPost }: BlogCardProps) => {
+const BlogCard: React.FC<BlogCardProps> = ({ author, title, content, publishedDate, id, fullWidth, tagsOnPost }) => {
   // split and slice combination is added so that the string doesn't get trimmed in middle of a word
   const quillContent = getPlainTextFromHTML(content).split(' ')?.slice(0, 100).join(' ') + '...';
 
@@ -56,11 +58,3 @@ const BlogCard = ({ author, title, content, publishedDate, id, fullWidth, tagsOn
 };
 
 export default BlogCard;
-
-function ArticleImage({ uniqueId }: { uniqueId: string }) {
-  return (
-    <object data={`https://picsum.photos/300/300?random=${uniqueId}`} type="image/jpeg" className="w-full">
-      <div className="bg-gray-50 w-[100%] animate-pulse aspect-square"></div>
-    </object>
-  );
-}

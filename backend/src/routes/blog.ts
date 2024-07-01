@@ -62,7 +62,7 @@ blogRouter.get("/bulk/:id?", async (c) => {
 
 blogRouter.get("/search", async (c) => {
   try {
-    const keyword = c.req.query("keyword") || "";
+    const keyword = await c.req.query("keyword") || "";
     const prisma = getDBInstance(c);
     const postQuery = buildPostSearchQuery(keyword);
     const userQuery = buildUserSearchQuery(keyword);
@@ -86,40 +86,69 @@ blogRouter.get("/search", async (c) => {
   }
 });
 
-blogRouter.get("/recommended", async (c) => {
+blogRouter.get("/recommendation/:blogId", async (c) => {
   try {
+    const blogId = c.req.param("blogId");
     const prisma = getDBInstance(c);
-    const recommendedPostsIds = await prisma.clap.groupBy({
-      by: ["postId"],
-      _count: {
-        userId: true
-      },  
-      orderBy: {
-        _count: {
-          userId: "desc"
-        }
-      },
-      take: 5
+
+    // Get Blog details
+    const blog = await prisma.post.findFirst({
+      where: { id: blogId },
+      include: { tagsOnPost: { include: { tag: true } }, author: true },
     });
 
-    const topFiveRecommendedPostsIds = recommendedPostsIds.map((post) => post.postId)
-    const recommendedPosts = await prisma.post.findMany({
+    if (!blog) {
+      c.status(404);
+      return c.json({ message: "Blog not found." });
+    }
+
+    // Get related blogs by tags
+    const tagIds = blog.tagsOnPost.map((tagOnPost) => tagOnPost.tag.id);
+    const relatedByTags = await prisma.post.findMany({
       where: {
-        id: {
-          in: topFiveRecommendedPostsIds
-        }
-      }
+        tagsOnPost: {
+          some: {
+            tagId: { in: tagIds },
+          },
+        },
+        id: { not: blogId },
+      },
+      take: 4,
     });
 
-    return c.json({
-      recommendedPosts
+    // Get related blogs by author
+    const relatedByAuthor = await prisma.post.findMany({
+      where: {
+        authorId: blog.author.id,
+        id: { not: blogId },
+      },
+      take: 4,
     });
-  } catch(error) {
-    console.log(error);
-    c.status(411);
+
+    // Combine related blogs and remove duplicates
+    const relatedBlogs = [...relatedByTags, ...relatedByAuthor];
+    const uniqueBlogs = Array.from(new Set(relatedBlogs.map((b) => b.id)))
+      .map(id => relatedBlogs.find(blog => blog?.id === id))
+      .filter((blog): blog is NonNullable<typeof blog> => blog !== undefined)
+      .slice(0, 4); // Ensure no more than 4 recommendations
+
+    // If there are not enough related blogs, fetch recent blogs
+    if (uniqueBlogs.length < 4) {
+      const recentBlogs = await prisma.post.findMany({
+        where: { id: { not: blogId } },
+        orderBy: { publishedDate: "desc" },
+        take: 4 - uniqueBlogs.length,
+      });
+      uniqueBlogs.push(...recentBlogs.filter(recentBlog => !uniqueBlogs.find(b => b?.id === recentBlog.id)));
+    }
+
     return c.json({
-      message: "Error while fetching post",
+      recommendedBlogs: uniqueBlogs,
     });
+  } catch (e) {
+    console.log(e);
+    c.status(500);
+    return c.json({ message: "Error while fetching recommendations " });
   }
 });
 
